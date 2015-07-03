@@ -42,4 +42,11 @@ class UserTest < ActiveSupport::TestCase
     assert user.valid?
   end
 
+  test "User needs to have a unique email." do
+    user = User.create(email: "dcms.pe@gmail.com", password: "bankaiic", name:"Danilo Caetano")
+    assert user.valid?
+    user2 = User.create(email: "dcms.pe@gmail.com", password: "bankaiic", name:"Darth Vader")
+    assert user2.errors[:email].any? 
+  end
+
 end
